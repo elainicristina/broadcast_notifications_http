@@ -1,10 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
+import { Webhooks } from "./webooks";
 
 @Entity('users')
 export class User {
 
-    @PrimaryGeneratedColumn('uuid')
-    id: string ;
+    @PrimaryGeneratedColumn()
+    id: bigint;
 
     @Column()
     email: string;
@@ -17,6 +18,12 @@ export class User {
 
     @Column({ type: 'date' })
     birth_date: Date;
+
+    @Column({type: 'integer'})
+    webhooks_count: number
+
+    @OneToMany(() => Webhooks, webhook => webhook.user_id)
+    webhooks: Webhooks[]
 
     @Column({ type: 'timestamp'})
     created_at: Date;
