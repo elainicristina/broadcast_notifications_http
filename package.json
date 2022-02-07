@@ -1,0 +1,38 @@
+{
+  "dependencies": {
+    "@types/uuid": "^8.3.4",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "knex": "^1.0.2",
+    "mysql": "^2.18.1",
+    "typeorm": "^0.2.41",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/express": "^4.17.13",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.5.5"
+  },
+  "name": "test_dev_jr_to_elaini_cristina",
+  "description": "Implementar um broadcast http, onde um usuário cadastra vários webhooks com url de destino, para estas urls receberem a mesma mensagem de cada notificação cadastrada. Disponibilizar telas simples em html para listagem, edição, cadastro e exclusão de dados. Disponibilizar uma API RESTful simples para cadastrar notificações.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev ./src/index.ts",
+    "start": "tsc && node ./build/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcelo-junior-egasosa/test_dev_jr_to_elaini_cristina.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcelo-junior-egasosa/test_dev_jr_to_elaini_cristina/issues"
+  },
+  "homepage": "https://github.com/marcelo-junior-egasosa/test_dev_jr_to_elaini_cristina#readme"
+}
