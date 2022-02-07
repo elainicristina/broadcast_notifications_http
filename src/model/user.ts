@@ -18,12 +18,6 @@ export class User {
     @Column({ type: 'date' })
     birth_date: Date;
 
-    @Column({type: 'integer'})
-    webhooks_count: number;
-
-    @Column({type: 'integer'})
-    notifications_count: number
-
     @Column({ type: 'timestamp'})
     created_at: Date;
 
