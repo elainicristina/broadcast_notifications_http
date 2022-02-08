@@ -1,5 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Webhooks } from "./webooks";
+import { Notifications } from "./notifications";
 
 @Entity('users')
 export class User {
@@ -22,8 +23,14 @@ export class User {
     @Column({type: 'integer'})
     webhooks_count: number
 
+    @Column({type: 'integer'})
+    notifications_count: number
+
     @OneToMany(() => Webhooks, webhook => webhook.user_id)
     webhooks: Webhooks[]
+
+    @OneToMany(() => Notifications, notification => notification.user_id)
+    notifications: Notifications[]
 
     @Column({ type: 'timestamp'})
     created_at: Date;
