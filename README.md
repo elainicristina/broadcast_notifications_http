@@ -49,6 +49,7 @@ tabela: users
   campo: kind
     tipo: string ou integer ou equivalente do seu fw web para enums.
     regras: obrigatório
+    valores: free, premium
   campo: actived
     tipo: boolean ou equivalente do seu fw web para valores lógicos.
     regras: obrigatório e valor inicial é false.
@@ -169,3 +170,8 @@ tabela: notifications
 - Disparar de forma assíncrona uma request **http**, para a **url** de cada **webhook** do **user** envolvido num novo cadastro de **notification**. Tanto no cadastro de **notification** via API, quanto via formulário html;
 - Aplicar testes nos demais componentes implementados;
 - Abrir pull request da branch **deliver_webhooks** para a **master**, em seguida fazer um review para conferir se faltou algo, finalmente fazer o merge do pull request na **master**.
+
+
+- Linguagem : **JavaScript** Version: "ECMA 5.1"
+- Framework : **ReactJs** Version: "^17.0.2"
+- Baco de Dados : **Mongoose** Version: "^6.2.0"
