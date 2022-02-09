@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn } from "typeorm";
 import { User } from "./user";
 
 @Entity('notification')
@@ -16,7 +16,7 @@ export class Notifications {
     @Column()
     interpolation: string;
 
-    @Column({ type: 'timestamp'})
+    @CreateDateColumn()
     created_at: Date;
 
 }
