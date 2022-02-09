@@ -65,9 +65,16 @@ export class NotificationsService implements BaseService {
 
     async delete(id: number): Promise<Notifications | undefined> {
         const notification = await this.repository.findOne(id);
-
+        
         if (notification !== undefined) {
-            await this.repository.remove(notification);
+            let user = await this.user_repository.findOne(notification.user_id);
+
+            if (user !== undefined) {
+                user.notifications_count -= 1;
+
+                await this.user_repository.save(user);
+                await this.repository.remove(notification)
+            }
         }
 
         return notification;

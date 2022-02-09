@@ -19,5 +19,4 @@ export class Notifications {
     @Column({ type: 'timestamp'})
     created_at: Date;
 
-
 }

@@ -1,6 +1,7 @@
 import { WebhooksService } from "../services/webhook";
 import { Request, Response } from "express";
 import { ModelBaseRoute } from "./base";
+import { UserService } from "../services/user";
 
 export class WebhooksRoutes extends ModelBaseRoute {
 
