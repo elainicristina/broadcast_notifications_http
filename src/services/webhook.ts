@@ -66,10 +66,19 @@ export class WebhooksService implements BaseService {
         const webhook = await this.repository.findOne(id);
 
         if (webhook !== undefined) {
-            await this.repository.remove(webhook);
+
+            let user = await this.user_repository.findOne(webhook.user_id);
+
+            if (user !== undefined) {
+                user.webhooks_count -= 1;
+
+                await this.user_repository.save(user);
+                await this.repository.remove(webhook)
+            }
         }
 
         return webhook;
     }
+
 
 }
