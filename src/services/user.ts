@@ -1,7 +1,6 @@
-import { Connection, getRepository, Repository} from "typeorm";
+import { Connection, Repository} from "typeorm";
 import { BaseService } from "./base";
 import { User } from "../model/user";
-import { validate } from "class-validator";
 
 export class UserService implements BaseService {
 
@@ -25,7 +24,7 @@ export class UserService implements BaseService {
 
     async create(entity: any): Promise<User | undefined> {
         let users;
-
+        
         if (entity.email && entity.kind && entity.actived 
             && entity.birth_date) {
             users = new User();
@@ -39,11 +38,7 @@ export class UserService implements BaseService {
             users.created_at = now;
             users.updated_at = now;
 
-            const erros = await validate(users)
-
-            if(erros.length === 0) {
-                const res = await this.repository.save(users)
-            }
+            await this.repository.save(users);
         }
 
 
