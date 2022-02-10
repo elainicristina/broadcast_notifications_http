@@ -2,6 +2,7 @@ import { Connection, Repository} from "typeorm";
 import { BaseService } from "./base";
 import { Notifications } from "../model/notifications";
 import { User } from "../model/user";
+import { stringify } from "uuid";
 
 export class NotificationsService implements BaseService {
 
@@ -34,7 +35,12 @@ export class NotificationsService implements BaseService {
 
             notification.user_id = entity.user_id;
             notification.message = entity.message;
-            notification.interpolation = entity.interpolation;
+
+            let interpolation = notification.message;
+            interpolation.replace('{{user_email}}', user.email);
+            interpolation.replace('{{database_current_timestemp}}', Date.now().toString());
+
+            notification.interpolation = interpolation;
 
             const now = new Date(Date.now());
             notification.created_at = now;

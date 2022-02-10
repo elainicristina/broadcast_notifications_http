@@ -169,3 +169,18 @@ tabela: notifications
 - Disparar de forma assíncrona uma request **http**, para a **url** de cada **webhook** do **user** envolvido num novo cadastro de **notification**. Tanto no cadastro de **notification** via API, quanto via formulário html;
 - Aplicar testes nos demais componentes implementados;
 - Abrir pull request da branch **deliver_webhooks** para a **master**, em seguida fazer um review para conferir se faltou algo, finalmente fazer o merge do pull request na **master**.
+
+
+### Tecnologias usadas no projeto
+
+- TypeScript - "typescript": "^4.5.5"
+
+- TypeORM -  "typeorm": "^0.2.41"
+
+- Express.JS - "express": "^4.17.2"
+
+- class-validator - "class-validator": "^0.13.2"
+
+- msQL - "mysql": "^2.18.1"
+
+- UUID - "uuid": "^8.3.2"
