@@ -41,7 +41,7 @@ export class WebhooksService implements BaseService {
 
             await this.repository.save(webhook);
 
-            user.webhooks_count += 1;
+            user.webhooks_count += 1
 
             await this.user_repository.save(user);
         }

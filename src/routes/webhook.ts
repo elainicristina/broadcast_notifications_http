@@ -1,7 +1,8 @@
 import { WebhooksService } from "../services/webhook";
 import { Request, Response } from "express";
 import { ModelBaseRoute } from "./base";
-import { UserService } from "../services/user";
+import { WebhookPayload } from "../schemas/webhooks_playloud";
+import { validateOrReject, ValidationError } from "class-validator";
 
 export class WebhooksRoutes extends ModelBaseRoute {
 
@@ -47,23 +48,44 @@ export class WebhooksRoutes extends ModelBaseRoute {
         try {
 
             const requestBody = req.body;
-            const webhook = await WebhooksRoutes.service.create(requestBody); 
+            
+            let userPayload = new WebhookPayload();
+            
+            userPayload.user_id = requestBody.user_id;
+            userPayload.url = requestBody.url;
+            
+            await validateOrReject(WebhookPayload);
 
-            if (webhook !== undefined) {
+            const users = await WebhooksRoutes.service.create(requestBody);
+            
+            if (users !== undefined) {
                 res.status(201);
-                res.json(webhook);
+                res.json(users);
             }
             else {
-                res.status(422);
-                res.json({message: 'error'});
+                res.status(400);
+                res.json({message: 'Erro ao inserir webhook.'});
             }
 
         }
-        catch (error) {
-            console.log(error);
+        catch (errors) {
+            
+            let statusCode = 500;
+            let endpointReturn = { message: 'Internal server error' };
 
-            res.status(500);
-            res.json({message: 'Internal server error'});
+            if (errors instanceof Array) {
+                for (let err of errors) {
+
+                    if (err instanceof ValidationError) {
+                        statusCode = 422;
+                        endpointReturn.message = 'Body mal formatado';
+                    }
+
+                }
+            }
+
+            res.status(statusCode);
+            res.json(endpointReturn);
         }        
     }
 

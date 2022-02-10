@@ -4,8 +4,8 @@ import { User } from "./user";
 @Entity('webhook')
 export class Webhooks {
 
-    @PrimaryGeneratedColumn()
-    id: bigint ;
+    @PrimaryGeneratedColumn('uuid')
+    id: string ;
 
     @ManyToOne(() => User, user => user.webhooks)
     user_id: User;

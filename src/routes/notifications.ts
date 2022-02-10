@@ -1,6 +1,8 @@
 import { NotificationsService } from "../services/notifications";
 import { Request, Response } from "express";
 import { ModelBaseRoute } from "./base";
+import { NotificationPayload } from "../schemas/notifications_playloud";
+import { validateOrReject, ValidationError } from "class-validator";
 
 export class NotificationsRoutes extends ModelBaseRoute {
 
@@ -46,23 +48,45 @@ export class NotificationsRoutes extends ModelBaseRoute {
         try {
 
             const requestBody = req.body;
-            const notification = await NotificationsRoutes.service.create(requestBody); 
+            
+            let userPayload = new NotificationPayload();
+            
+            userPayload.user_id = requestBody.user_id;
+            userPayload.message = requestBody.kind;
+            userPayload.interpolation = requestBody.actived;
+            
+            await validateOrReject(NotificationPayload);
 
-            if (notification !== undefined) {
+            const users = await NotificationsRoutes.service.create(requestBody);
+            
+            if (users !== undefined) {
                 res.status(201);
-                res.json(notification);
+                res.json(users);
             }
             else {
-                res.status(422);
-                res.json({message: 'error'});
+                res.status(400);
+                res.json({message: 'Erro ao inserir a notificação'});
             }
 
         }
-        catch (error) {
-            console.log(error);
+        catch (errors) {
+            
+            let statusCode = 500;
+            let endpointReturn = { message: 'Internal server error' };
 
-            res.status(500);
-            res.json({message: 'Internal server error'});
+            if (errors instanceof Array) {
+                for (let err of errors) {
+
+                    if (err instanceof ValidationError) {
+                        statusCode = 422;
+                        endpointReturn.message = 'Body mal formatado';
+                    }
+
+                }
+            }
+
+            res.status(statusCode);
+            res.json(endpointReturn);
         }        
     }
 

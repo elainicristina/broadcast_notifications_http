@@ -5,8 +5,8 @@ import { Notifications } from "./notifications";
 @Entity('users')
 export class User {
 
-    @PrimaryGeneratedColumn()
-    id: bigint;
+    @PrimaryGeneratedColumn('uuid')
+    id: number;
 
     @Column()
     email: string;
@@ -17,20 +17,14 @@ export class User {
     @Column()
     actived: boolean;
 
-    @Column({ type: 'date' })
+    @Column({type: 'date'})
     birth_date: Date;
 
     @Column({type: 'integer'})
-    webhooks_count: number
+    webhooks_count: number;
 
     @Column({type: 'integer'})
-    notifications_count: number
-
-    @OneToMany(() => Webhooks, webhook => webhook.user_id)
-    webhooks: Webhooks[]
-
-    @OneToMany(() => Notifications, notification => notification.user_id)
-    notifications: Notifications[]
+    notifications_count: number;
 
     @Column({ type: 'timestamp'})
     created_at: Date;
@@ -38,4 +32,10 @@ export class User {
     @Column({ type: 'timestamp'})
     updated_at: Date;
 
+
+    @OneToMany(() => Webhooks, webhook => webhook.user_id)
+    webhooks: Webhooks[];
+
+    @OneToMany(() => Notifications, notification => notification.user_id)
+    notifications: Notifications[];
 }

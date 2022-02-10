@@ -41,7 +41,7 @@ export class NotificationsService implements BaseService {
 
             await this.repository.save(notification);
 
-            user.notifications_count += 1;
+                user.notifications_count += 1
 
             await this.user_repository.save(user);
         }
