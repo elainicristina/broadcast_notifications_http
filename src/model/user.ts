@@ -1,14 +1,15 @@
 
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Webhooks } from "./webooks";
+import { Notifications } from "./notifications";
 
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('users')
 export class User {
 
-    @PrimaryGeneratedColumn()
-    id: bigint;
+    @PrimaryGeneratedColumn('uuid')
+    id: number;
 
     @Column()
     email: string;
@@ -19,15 +20,15 @@ export class User {
     @Column()
     actived: boolean;
 
-    @Column({ type: 'date' })
+    @Column({type: 'date'})
     birth_date: Date;
 
 
     @Column({type: 'integer'})
-    webhooks_count: number
+    webhooks_count: number;
 
-    @OneToMany(() => Webhooks, webhook => webhook.user_id)
-    webhooks: Webhooks[]
+    @Column({type: 'integer'})
+    notifications_count: number;
 
     @Column({ type: 'timestamp'})
 
@@ -38,4 +39,10 @@ export class User {
     @UpdateDateColumn()
     updated_at: Date;
 
+
+    @OneToMany(() => Webhooks, webhook => webhook.user_id)
+    webhooks: Webhooks[];
+
+    @OneToMany(() => Notifications, notification => notification.user_id)
+    notifications: Notifications[];
 }

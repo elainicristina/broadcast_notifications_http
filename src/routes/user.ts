@@ -1,6 +1,8 @@
 import { UserService } from "../services/user";
 import { Request, Response } from "express";
 import { ModelBaseRoute } from "./base";
+import { UserPayload } from "../schemas/user_payload";
+import { validateOrReject, ValidationError } from "class-validator";
 
 export class UserRoutes extends ModelBaseRoute {
 
@@ -46,23 +48,46 @@ export class UserRoutes extends ModelBaseRoute {
         try {
 
             const requestBody = req.body;
-            const users = await UserRoutes.service.create(requestBody); 
+            
+            let userPayload = new UserPayload();
+            
+            userPayload.email = requestBody.email;
+            userPayload.kind = requestBody.kind;
+            userPayload.actived = requestBody.actived;
+            userPayload.birth_date = requestBody.birth_date;
+            
+            await validateOrReject(userPayload);
 
+            const users = await UserRoutes.service.create(requestBody);
+            
             if (users !== undefined) {
                 res.status(201);
                 res.json(users);
             }
             else {
-                res.status(422);
-                res.json({message: 'error'});
+                res.status(400);
+                res.json({message: 'Erro ao inserir o usuário'});
             }
 
         }
-        catch (error) {
-            console.log(error);
+        catch (errors) {
+            
+            let statusCode = 500;
+            let endpointReturn = { message: 'Internal server error' };
 
-            res.status(500);
-            res.json({message: 'Internal server error'});
+            if (errors instanceof Array) {
+                for (let err of errors) {
+
+                    if (err instanceof ValidationError) {
+                        statusCode = 422;
+                        endpointReturn.message = 'Body mal formatado';
+                    }
+
+                }
+            }
+
+            res.status(statusCode);
+            res.json(endpointReturn);
         }        
     }
 

@@ -1,6 +1,7 @@
 import { Connection, Repository} from "typeorm";
 import { BaseService } from "./base";
 import { User } from "../model/user";
+import { validate, validateOrReject, ValidatePromise, ValidationError } from "class-validator";
 
 export class UserService implements BaseService {
 
@@ -38,7 +39,12 @@ export class UserService implements BaseService {
             users.created_at = now;
             users.updated_at = now;
 
-            await this.repository.save(users);
+            users.notifications_count = 0
+            users.webhooks_count = 0
+
+            validate(users)
+
+            return await this.repository.save(users)
         }
 
 
