@@ -70,6 +70,7 @@ export class WebhooksService implements BaseService {
         const webhook = await this.repository.findOne(id);
         
         if (webhook !== undefined) {
+
             let user = await this.user_repository.findOne(webhook.user_id);
 
             if (user !== undefined) {
@@ -82,5 +83,6 @@ export class WebhooksService implements BaseService {
 
         return webhook;
     }
+
 
 }

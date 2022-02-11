@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, CreateDateColumn, UpdateDateColumn } from "typeorm";
 import { User } from "./user";
 
 @Entity('webhook')
@@ -13,10 +13,10 @@ export class Webhooks {
     @Column()
     url: string;
 
-    @Column({ type: 'timestamp'})
+    @CreateDateColumn()
     created_at: Date;
 
-    @Column({ type: 'timestamp'})
+    @UpdateDateColumn()
     updated_at: Date;
 
 }
