@@ -51,10 +51,14 @@ export class WebhooksService implements BaseService {
 
     async update(id: number, values: any): Promise<Webhooks | undefined> {
         const webhook = await this.repository.findOne(id);
+       
 
         if ((webhook !== undefined) && (values !== {})) {
             if (values.user_id) webhook.user_id = values.user_id;
             if (values.url) webhook.url = values.url;
+
+            const now = new Date(Date.now());
+            webhook.updated_at = now;
 
             await this.repository.save(webhook);
         }
@@ -64,9 +68,16 @@ export class WebhooksService implements BaseService {
 
     async delete(id: number): Promise<Webhooks | undefined> {
         const webhook = await this.repository.findOne(id);
-
+        
         if (webhook !== undefined) {
-            await this.repository.remove(webhook);
+            let user = await this.user_repository.findOne(webhook.user_id);
+
+            if (user !== undefined) {
+                user.webhooks_count -= 1;
+
+                await this.user_repository.save(user);
+                await this.repository.remove(webhook)
+            }
         }
 
         return webhook;

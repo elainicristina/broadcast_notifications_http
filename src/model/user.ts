@@ -5,8 +5,8 @@ import { Notifications } from "./notifications";
 @Entity('users')
 export class User {
 
-    @PrimaryGeneratedColumn('uuid')
-    id: number;
+    @PrimaryGeneratedColumn()
+    id: bigint;
 
     @Column()
     email: string;

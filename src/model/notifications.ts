@@ -4,8 +4,8 @@ import { User } from "./user";
 @Entity('notification')
 export class Notifications {
 
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+    @PrimaryGeneratedColumn()
+    id: bigint;
 
     @ManyToOne(() => User, user => user.notifications)
     user_id: User;

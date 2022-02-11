@@ -2,7 +2,6 @@ import { Connection, Repository} from "typeorm";
 import { BaseService } from "./base";
 import { Notifications } from "../model/notifications";
 import { User } from "../model/user";
-import { stringify } from "uuid";
 
 export class NotificationsService implements BaseService {
 
@@ -28,17 +27,19 @@ export class NotificationsService implements BaseService {
 
     async create(entity: any): Promise<Notifications | undefined> {
         let notification;
-        let user = await this.user_repository.findOne(entity.user_id);
+        let user = await this.user_repository.findOne(entity.user_id && entity.email);
 
-        if (user && entity.user_id && entity.message && entity.interpolation) {
+        if (user && entity.user_id && entity.message) {
             notification = new Notifications();
 
             notification.user_id = entity.user_id;
             notification.message = entity.message;
 
+
             let interpolation = notification.message;
-            interpolation.replace('{{user_email}}', user.email);
-            interpolation.replace('{{database_current_timestemp}}', Date.now().toString());
+            
+            interpolation = interpolation.replace('{{user_email}}', user.email);
+            interpolation = interpolation.replace('{{database_current_timestemp}}', Date.now().toString());
 
             notification.interpolation = interpolation;
 

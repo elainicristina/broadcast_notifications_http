@@ -9,7 +9,4 @@ export class NotificationPayload {
     @IsString()
     message: string;
 
-    @IsString()
-    interpolation: string;
-
 }

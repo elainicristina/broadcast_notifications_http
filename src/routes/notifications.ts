@@ -53,7 +53,6 @@ export class NotificationsRoutes extends ModelBaseRoute {
             
             userPayload.user_id = requestBody.user_id;
             userPayload.message = requestBody.kind;
-            userPayload.interpolation = requestBody.actived;
             
             await validateOrReject(NotificationPayload);
 
