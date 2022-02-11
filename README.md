@@ -171,7 +171,59 @@ tabela: notifications
 - Aplicar testes nos demais componentes implementados;
 - Abrir pull request da branch **deliver_webhooks** para a **master**, em seguida fazer um review para conferir se faltou algo, finalmente fazer o merge do pull request na **master**.
 
+### Tecnologias usadas no projeto
 
-- Linguagem : **JavaScript** Version: "ECMA 5.1"
-- Framework : **ReactJs** Version: "^17.0.2"
-- Baco de Dados : **Mongoose** Version: "^6.2.0"
+- TypeScript - "typescript": "^4.5.5"
+
+- TypeORM -  "typeorm": "^0.2.41"
+
+- Express.JS - "express": "^4.17.2"
+
+- class-validator - "class-validator": "^0.13.2"
+
+- msQL - "mysql": "^2.18.1"
+
+- UUID - "uuid": "^8.3.2"
+
+### Como rodar
+
+```json
+  
+  npm run start
+
+```
+
+- criar, atualizar(id) usuario :
+- para deletar : apenas o id
+
+```json 
+  
+  "email":,
+  "kind",
+  "actived",
+  "birth_date"
+
+```
+
+- criar, atualizar(id) webook:
+- deletar: apenas o id
+```json 
+  
+  "user_id": do usuario
+  "url"
+
+```
+
+- criar e atualizar(id) notificações
+
+```json 
+  
+  "user_id": do usuario
+  "messagem":
+
+```
+
+### Observações
+
+Não me interpretei direito o readme e acabei fazendo um crud completo de tudo. E também não cheguei a fazer todas as implementações, falta algumas coisas que n]ao conseguir terminar a tempo.
+Além disso, quero me desculpa por não ter mandando as atualizações para o github, fiquei e ainda estou muito nervosa e isso acaba dificultando as coisas. Mas em geral, amei fazer o desafio, espero que gostem.
