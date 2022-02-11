@@ -1,5 +1,8 @@
+
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from "typeorm";
 import { Webhooks } from "./webooks";
+
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from "typeorm";
 
 @Entity('users')
 export class User {
@@ -19,6 +22,7 @@ export class User {
     @Column({ type: 'date' })
     birth_date: Date;
 
+
     @Column({type: 'integer'})
     webhooks_count: number
 
@@ -26,9 +30,12 @@ export class User {
     webhooks: Webhooks[]
 
     @Column({ type: 'timestamp'})
+
+    @CreateDateColumn()
+
     created_at: Date;
 
-    @Column({ type: 'timestamp'})
+    @UpdateDateColumn()
     updated_at: Date;
 
 }

@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "@types/uuid": "^8.3.4",
+    "class-validator": "^0.13.2",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",

@@ -49,6 +49,7 @@ tabela: users
   campo: kind
     tipo: string ou integer ou equivalente do seu fw web para enums.
     regras: obrigatório
+    valores: free, premium
   campo: actived
     tipo: boolean ou equivalente do seu fw web para valores lógicos.
     regras: obrigatório e valor inicial é false.
@@ -169,3 +170,60 @@ tabela: notifications
 - Disparar de forma assíncrona uma request **http**, para a **url** de cada **webhook** do **user** envolvido num novo cadastro de **notification**. Tanto no cadastro de **notification** via API, quanto via formulário html;
 - Aplicar testes nos demais componentes implementados;
 - Abrir pull request da branch **deliver_webhooks** para a **master**, em seguida fazer um review para conferir se faltou algo, finalmente fazer o merge do pull request na **master**.
+
+### Tecnologias usadas no projeto
+
+- TypeScript - "typescript": "^4.5.5"
+
+- TypeORM -  "typeorm": "^0.2.41"
+
+- Express.JS - "express": "^4.17.2"
+
+- class-validator - "class-validator": "^0.13.2"
+
+- msQL - "mysql": "^2.18.1"
+
+- UUID - "uuid": "^8.3.2"
+
+### Como rodar
+
+```json
+
+  "npm run start"
+
+```
+
+- criar, atualizar(id) usuario :
+- para deletar : apenas o id
+
+```json 
+  
+  "email":,
+  "kind",
+  "actived",
+  "birth_date"
+
+```
+
+- criar, atualizar(id) webook:
+- deletar: apenas o id
+```json 
+  
+  "user_id": "do usuario"
+  "url":
+
+```
+
+- criar e atualizar(id) notificações
+
+```json 
+  
+  "user_id": "do usuario"
+  "messagem":
+
+```
+
+### Observações
+
+Não interpretei direito o readme e acabei fazendo um crud completo de tudo. E também não cheguei a fazer todas as implementações, falta algumas coisas que eu nao conseguir terminar a tempo.
+Além disso, quero me desculpa por não ter mandando as atualizações para o github, fiquei e ainda estou muito nervosa e isso acaba dificultando as coisas. Mas em geral, amei fazer o desafio, espero que gostem.
