@@ -25,7 +25,7 @@ export class UserService implements BaseService {
 
     async create(entity: any): Promise<User | undefined> {
         let users;
-
+        
         if (entity.email && entity.kind && entity.actived 
             && entity.birth_date) {
             users = new User();
