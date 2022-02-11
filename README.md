@@ -188,8 +188,8 @@ tabela: notifications
 ### Como rodar
 
 ```json
-  
-  npm run start
+
+  "npm run start"
 
 ```
 
@@ -209,8 +209,8 @@ tabela: notifications
 - deletar: apenas o id
 ```json 
   
-  "user_id": do usuario
-  "url"
+  "user_id": "do usuario"
+  "url":
 
 ```
 
@@ -218,12 +218,12 @@ tabela: notifications
 
 ```json 
   
-  "user_id": do usuario
+  "user_id": "do usuario"
   "messagem":
 
 ```
 
 ### Observações
 
-Não me interpretei direito o readme e acabei fazendo um crud completo de tudo. E também não cheguei a fazer todas as implementações, falta algumas coisas que n]ao conseguir terminar a tempo.
+Não interpretei direito o readme e acabei fazendo um crud completo de tudo. E também não cheguei a fazer todas as implementações, falta algumas coisas que eu nao conseguir terminar a tempo.
 Além disso, quero me desculpa por não ter mandando as atualizações para o github, fiquei e ainda estou muito nervosa e isso acaba dificultando as coisas. Mas em geral, amei fazer o desafio, espero que gostem.
